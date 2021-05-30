@@ -1,9 +1,7 @@
 module.exports = {
     name: "test",
-    alias:["tst"],
-    permissions: [],
-    description: "test command", 
-    execute(message, args){
-        msg.channel.send("Malice Active")
+    description: "just a test function",
+    execute(client, message, args, Discord){
+        message.channel.send("Active");
     }
 }
