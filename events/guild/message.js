@@ -13,14 +13,15 @@ module.exports = async (Discord, client, message) =>{
     }
 
     if(!message.content.startsWith(prefix) || message.author.bot){
-        if(!profileData){
+        if(!profileData && !message.author.bot){
             let profile = await profileModel.create({
                 userID: message.author.id,
-                messagesSent: 0,
+                messagesSent: 1,
                 roles: 0
             });
             profile.save();
-        } else {
+            return;
+        } else if(profileData && !message.author.bot) {
             const response = await profileModel.findOneAndUpdate({
                 userID: message.author.id,
             }, {
@@ -28,6 +29,7 @@ module.exports = async (Discord, client, message) =>{
                     messagesSent: 1,
                 },
             });
+            return;
         }
     };
 
