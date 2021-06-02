@@ -1,4 +1,4 @@
-const profileModel = require('../../models/activitySchema');
+const profileModel = require('../../models/activity');
 
 module.exports = async(client, Discord, member) => {
     let profile = await profileModel.create({

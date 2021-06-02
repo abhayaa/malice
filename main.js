@@ -1,14 +1,28 @@
 const fs = require('fs')
+const config = require('./config.json')
 require('dotenv').config()
-const Discord = require('discord.js');
-const profileModel = require('./models/activitySchema');
+const Discord  = require('discord.js');
 const mongoose = require('mongoose');
+const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 
-const client = new Discord.Client();
+module.exports = {client};
 
+const { GiveawaysManager} = require('discord-giveaways');
 
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
+
+client.giveawaysManager = new GiveawaysManager(client, {
+    storage: "./giveaways.json",
+    updateCountdownEvery: 5000,
+    default: {
+        botsCanWin: false,
+        embedColor: "#FF0000",
+        reaction: "🎉"
+    }
+});
+
+module.exports = {client};
 
 ['command_handler', 'event_handler'].forEach(handler =>{
     require(`./handlers/${handler}`)(client, Discord);
@@ -33,7 +47,5 @@ mongoose.connect(process.env.MONGO, {
     console.log(err)
 })
  
-
-
 client.login(process.env.TOKEN);
 

@@ -1,5 +1,5 @@
 require('dotenv').config()
-const profileModel = require('../../models/activitySchema')
+const profileModel = require('../../models/activity')
 
 module.exports = async (Discord, client, message) =>{
     const prefix = process.env.PREFIX;
@@ -16,6 +16,7 @@ module.exports = async (Discord, client, message) =>{
         if(!profileData && !message.author.bot){
             let profile = await profileModel.create({
                 userID: message.author.id,
+                username: message.author.user,
                 messagesSent: 1,
                 roles: 0
             });
@@ -33,9 +34,11 @@ module.exports = async (Discord, client, message) =>{
         }
     };
 
-    const args = message.content.slice(prefix.length).split(/ +/);
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
     const command = client.commands.get(cmd);
+
     
     if(command) command.execute(message, client, args, Discord, profileData);
 }
