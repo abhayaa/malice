@@ -47,7 +47,7 @@ module.exports = {
             user = message.guild.members.cache.get(member);
             
             user.roles.cache.forEach( role =>{
-                if (role.name == 'Muse'){
+                if (role.name == 'Muse' || role.name == 'Muse Independent Partner' || role.name == 'Muse Master' || role.name == 'Dyno'){
                     kick = false;
                 }
             });

@@ -10,8 +10,11 @@ module.exports = {
         accessableby: "Admins",
         aliases: [], // To add custom aliases just type ["alias1", "alias2"].
         async execute(message, client, args, Discord, profileData){
-            if (!message.member.roles.cache.some((r) => r.name === "Hands of Malice")) {
-                return message.channel.send(':boom: You need to have the \`MANAGE_MESSAGES\` permissions to start giveaways.');
+            if (args[0] === '-help'){
+                return message.channel.send('Usage m!gstart [channel] [time] [# of winners] [Prize]');
+            }
+            if (message.channel.id != process.env.DEV_CHANNEL) {
+                return message.channel.send('Cannot start giveaway here :)');
             }
             let giveawayChannel = message.mentions.channels.first();
             if (!giveawayChannel) {
@@ -38,14 +41,15 @@ module.exports = {
                     time: ms(giveawayDuration),
                     prize: giveawayPrize,
                     winnerCount: parseInt(giveawayNumberWinners),
+                    exemptMembers: (member) => member.roles.cache.some((r) => r.name === 'Castaway'),
                     hostedBy: config["Giveaway_Options"].hostedBy ? message.author : null,
                     messages: {
-                        giveaway: ":maliceheart: **GIVEAWAY** :maliceheart:",
+                        giveaway: " **GIVEAWAY** ",
                         giveawayEnded: ":tada: **GIVEAWAY ENDED** :tada:",
                         timeRemaining: "Time remaining: **{duration}**!",
                         inviteToParticipate: "React with 🎉 to participate!",
                         winMessage: "Congratulations, {winners}! You won the **{prize}**!",
-                        embedFooter: "Giveaways",
+                        embedFooter: "Malice Giveaways",
                         noWinner: "Not enough entrants to determine a winner!",
                         hostedBy: "Hosted by: {user}",
                         winners: "winner(s)",
@@ -61,5 +65,7 @@ module.exports = {
                 });
             }
             message.channel.send(`The giveaway for the \`${giveawayPrize}\` is starting in ${giveawayChannel}.`);
+
+
         }
 }
