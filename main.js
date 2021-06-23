@@ -37,15 +37,15 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-// mongoose.connect(process.env.MONGO, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false,
-// }).then(() => {
-//     console.log('Connected to the database');
-// }).catch((err) => {
-//     console.log(err)
-// })
+mongoose.connect(process.env.MONGO, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+}).then(() => {
+    console.log('Connected to the database');
+}).catch((err) => {
+    console.log(err)
+})
  
 client.login(process.env.TOKEN);
 
