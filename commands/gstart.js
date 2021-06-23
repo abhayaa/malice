@@ -44,10 +44,10 @@ module.exports = {
                     exemptMembers: (member) => member.roles.cache.some((r) => r.name === 'Castaway'),
                     hostedBy: config["Giveaway_Options"].hostedBy ? message.author : null,
                     messages: {
-                        giveaway: " **GIVEAWAY** ",
-                        giveawayEnded: ":tada: **GIVEAWAY ENDED** :tada:",
+                        giveaway: "<a:maliceworship:832655353523077120> **GIVEAWAY** <a:maliceworshipR:833430111545458739>",
+                        giveawayEnded: "<a:malicemoon:838218751416467466> **GIVEAWAY ENDED** <a:malicemoon:838218751416467466>",
                         timeRemaining: "Time remaining: **{duration}**!",
-                        inviteToParticipate: "React with 🎉 to participate!",
+                        inviteToParticipate: "React with <:maliceface:814236915310133278> to participate!",
                         winMessage: "Congratulations, {winners}! You won the **{prize}**!",
                         embedFooter: "Malice Giveaways",
                         noWinner: "Not enough entrants to determine a winner!",
