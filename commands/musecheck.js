@@ -9,38 +9,29 @@ module.exports = {
     async execute(message, client, args, Discord, profileData){
         let muse  = client.guilds.cache.get(process.env.MUSE);
         let malice = client.guilds.cache.get(process.env.MALICE);
-        
-
-
-        let maliceMembers = malice.members.cache.array();
-        let museMembers = muse.members.cache.array();
-
-        let kickable = [];
         let maliceIds = [];
         let museIds = [];
 
-        maliceMembers.forEach(member => {
-            if(!member.bot){
-                maliceIds.push(member.id);
-            }
+        await malice.members.fetch()
+        .then(members => {
+            maliceIds = members.map(user => user.id);
         })
+        .catch(err => {
+            console.log("err while adding members to malice list", err);
+        });
 
-        museMembers.forEach(member =>{
-            if(!member.bot){
-                museIds.push(member.id);
-            }
-        })
+        await muse.members.fetch()
+        .then(members => {
+            museIds = members.map(user => user.id);
+        }).catch(err => {
+            console.log("err while adding to muse list", err);
+        });
 
-        // await message.channel.send("number of muse members w/o bots : " + museIds.length);
-        // await message.channel.send("number of malice members w/o bots: " + maliceIds.length);
-        // num = maliceIds.length - museIds.length;
-        // await message.channel.send("# difference in members between Malice and Muse: " + num);
-        
-
+        let kickable = [];
+       
         kickable = museIds.filter(e => !maliceIds.includes(e));
 
-        //await message.channel.send(kickable.length + " members to kick (probably)");
-
+        console.log(kickable);
 
         await kickable.forEach(member => {
             kick = true;
