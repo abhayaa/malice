@@ -9,9 +9,6 @@ module.exports = {
         accessableby: "Admins",
         aliases: [], // To add custom aliases just type ["alias1", "alias2"].
         async execute(message, client, args, Discord, profileData){
-            if (!message.member.roles.cache.some((r) => r.name === "Hands of Malice")) {
-                return message.channel.send('Insufficient permissions to reroll.');
-            }
 
             if (!args[0]) {
                 return message.channel.send('Invalid giveaway.');
