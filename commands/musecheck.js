@@ -31,8 +31,6 @@ module.exports = {
        
         kickable = museIds.filter(e => !maliceIds.includes(e));
 
-        console.log(kickable);
-
         await kickable.forEach(member => {
             kick = true;
             user = message.guild.members.cache.get(member);
