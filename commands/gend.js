@@ -5,6 +5,16 @@ module.exports = {
         category:"Giveaways",
         aliases: [], // To add custom aliases just type ["alias1", "alias2"].
         async execute (message, client, args, Discord, profileData){
+
+            if((!message.member.roles.cache.has(process.env.MALICE_ROLE)) &&
+                (!message.member.roles.cache.has(process.env.HEART_OF_MALICE)) &&
+                (!message.member.roles.cache.has(process.env.HANDS_OF_MALICE)) &&
+                (!message.member.roles.cache.has(process.env.SOUL_OF_MALICE)) &&
+                (!message.member.roles.cache.has(process.env.MIND_OF_MALICE)) &&
+                (!message.member.roles.cache.has(process.env.CREATION))){
+                    message.channel.send("You don't have permission to use this command.")
+                    return;
+            }
             
             if (!args[0]) {
                 return message.channel.send('Invalid giveaway to end.');

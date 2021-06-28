@@ -10,30 +10,34 @@ module.exports = {
         accessableby: "Admins",
         aliases: [], // To add custom aliases just type ["alias1", "alias2"].
         async execute(message, client, args, Discord, profileData){
-            if (args[0] === '-help'){
-                return message.channel.send('Usage m!gstart [channel] [time] [# of winners] [Prize]');
-            }
-            if (message.channel.id != process.env.DEV_CHANNEL) {
-                return message.channel.send('Cannot start giveaway here :)');
+
+            if((!message.member.roles.cache.has(process.env.MALICE_ROLE)) &&
+                (!message.member.roles.cache.has(process.env.HEART_OF_MALICE)) &&
+                (!message.member.roles.cache.has(process.env.HANDS_OF_MALICE)) &&
+                (!message.member.roles.cache.has(process.env.SOUL_OF_MALICE)) &&
+                (!message.member.roles.cache.has(process.env.MIND_OF_MALICE)) &&
+                (!message.member.roles.cache.has(process.env.CREATION))){
+                    message.channel.send("You don't have permission to use this command.")
+                    return;
             }
             let giveawayChannel = message.mentions.channels.first();
             if (!giveawayChannel) {
-                return message.channel.send('Invalid channel.');
+                return message.channel.send('Invalid channel - Run m!ghelp to see usage.');
             }
     
             let giveawayDuration = args[1];
             if (!giveawayDuration || isNaN(ms(giveawayDuration))) {
-                return message.channel.send('No duration provided.');
+                return message.channel.send('No duration provided -  Run m!ghelp to see usage.');
             }
     
             let giveawayNumberWinners = args[2];
             if (isNaN(giveawayNumberWinners) || (parseInt(giveawayNumberWinners) <= 0)) {
-                return message.channel.send('Number of winners missing.');
+                return message.channel.send('Number of winners missing - Run m!ghelp to see usage.');
             }
     
             let giveawayPrize = args.slice(3).join(' ');
             if (!giveawayPrize) {
-                return message.channel.send('Prize invalid');
+                return message.channel.send('Prize invalid - Run m!ghelp to see usage.');
             }
             if (config["Giveaway_Options"].showMention) {
     

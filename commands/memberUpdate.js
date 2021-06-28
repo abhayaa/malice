@@ -7,6 +7,16 @@ module.exports = {
     permissions: [],
     description: "Get member activity by messages",
     async execute(message, client, args, Discord, profileData){
+        if((!message.member.roles.cache.has(process.env.MALICE_ROLE)) &&
+            (!message.member.roles.cache.has(process.env.HEART_OF_MALICE)) &&
+            (!message.member.roles.cache.has(process.env.HANDS_OF_MALICE)) &&
+            (!message.member.roles.cache.has(process.env.SOUL_OF_MALICE)) &&
+            (!message.member.roles.cache.has(process.env.MIND_OF_MALICE)) &&
+            (!message.member.roles.cache.has(process.env.CREATION))){
+                message.channel.send("You don't have permission to use this command.")
+                return;
+        }
+        
         num = 0;
         message.guild.members.fetch()
         .then(member =>{

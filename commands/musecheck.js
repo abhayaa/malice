@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-
 module.exports = {
     name: "musecheck",
     alias: [],
