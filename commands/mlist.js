@@ -52,7 +52,7 @@ module.exports = {
 
         let exiledDesc = " ";
 
-        await exiled.forEach(entry =>{
+        await exiled.forEach(entry =>{''
             user = malice.members.fetch(entry)
             .then(user=> {
                 exiledDesc = exiledDesc +  ' ' + `${user}`;

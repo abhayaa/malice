@@ -22,6 +22,10 @@ module.exports = async (Discord, client, message) =>{
             });
         };
 
+    if(message.author.bot){
+        return;
+    }
+
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
     const command = client.commands.get(cmd);
