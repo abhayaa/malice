@@ -27,7 +27,6 @@ module.exports = {
         }else {
             message.channel.send("User does not have Cult Role");
         }
-
     }
 }
 

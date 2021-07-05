@@ -27,9 +27,18 @@ module.exports = {
         });
 
         let kickable = [];
+        let kick_now = [];
        
         kickable = museIds.filter(e => !maliceIds.includes(e));
 
+        let musecheckembed = new Discord.MessageEmbed()
+            .setAuthor("Muse members not in Malice")
+            .setColor("#427318")
+            .setThumbnail(client.user.avatarURL)
+            .setFooter('@WeAreMalice', 
+                'https://cdn.discordapp.com/attachments/830895627457790038/830940981943074846/malice.png');
+
+        let embedDesc = " ";
         await kickable.forEach(member => {
             kick = true;
             user = message.guild.members.cache.get(member);
@@ -41,10 +50,20 @@ module.exports = {
             });
 
             if(kick && !user.bot){
-                message.channel.send(`${user}`);
+                //message.channel.send(`${user}`);
+                embedDesc = embedDesc + ' ' + `${user}`;
+                kick_now.push(user);
             }
         });
 
-        message.channel.send('End.');
+        musecheckembed.setDescription(embedDesc);
+        message.channel.send(musecheckembed);
+
+        if(args[0] == "-k"){
+            await kick_now.forEach(user => {
+                user.kick();
+            })
+            muse.channels.cache.get(process.env.MUSE_DEV_CHANNEL).send(`Above members kicked.`);
+        }
     }
 }

@@ -22,6 +22,9 @@ module.exports = async (Discord, client, member) =>{
     if(museMembers.includes(memberid)){
         user = await muse.members.cache.get(memberid);
         muse.channels.cache.get(process.env.MUSE_DEV_CHANNEL).send(`Member left/was kicked from Malice : ${user}`);
+        await user.kick();
+        muse.channels.cache.get(process.env.MUSE_DEV_CHANNEL).send(`And now kicked from Muse 8) : ${user}`);
+        
     }
 
 }
