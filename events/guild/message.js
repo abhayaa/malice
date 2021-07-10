@@ -26,6 +26,16 @@ module.exports = async (Discord, client, message) =>{
         return;
     }
 
+    if(message.channel.id === process.env.MALICE_SUCCESS){
+        console.log("saw message");
+        console.log(message.attachments.size);
+        if(message.attachments.size === 0){
+            //message.channel.send("image detected");
+            // message.channel.send("no image attached, deleting");
+            await message.delete({timeout: 1000});
+        }
+    }
+
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
     const command = client.commands.get(cmd);
