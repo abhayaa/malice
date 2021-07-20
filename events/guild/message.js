@@ -28,7 +28,6 @@ module.exports = async (Discord, client, message) =>{
 
     if(message.channel.id === process.env.MALICE_SUCCESS){
         if(message.content.includes("http")){
-            message.channel.send("contains links");
             return;
         }
         if(message.attachments.size === 0){
