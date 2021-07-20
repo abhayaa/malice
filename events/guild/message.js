@@ -27,8 +27,10 @@ module.exports = async (Discord, client, message) =>{
     }
 
     if(message.channel.id === process.env.MALICE_SUCCESS){
-        console.log("saw message");
-        console.log(message.attachments.size);
+        if(message.content.includes("http")){
+            message.channel.send("contains links");
+            return;
+        }
         if(message.attachments.size === 0){
             //message.channel.send("image detected");
             // message.channel.send("no image attached, deleting");
