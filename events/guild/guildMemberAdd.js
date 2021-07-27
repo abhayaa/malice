@@ -21,7 +21,6 @@ module.exports = async(Discord, client, member) => {
     if(member.guild.id === muse.id){
         user = await muse.members.cache.get(memberid);
         await user.roles.add(process.env.MALICE_MUSE);
-        muse.channels.cache.get(process.env.MUSE_DEV_CHANNEL).send(`New user joined, assigned Malice Muse role: ${user}`);
     }
 
     //profile.save();

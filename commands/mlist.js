@@ -45,7 +45,7 @@ module.exports = {
         });
         
         let exiledEmbed = new Discord.MessageEmbed()
-            .setAuthor("Members with Exiled Role")
+            .setAuthor("Members Joined in last week")
             .setColor("#427318")
             .setThumbnail(client.user.avatarURL)
             .setTimestamp(Date.now());
