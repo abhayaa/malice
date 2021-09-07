@@ -7,7 +7,7 @@ module.exports = {
     async execute (message, client, args, Discord, profileData){
         if(message.channel.id === process.env.DEV_CHANNEL){
             if(args[0] === 'help'){
-                message.channel.send("Help message");
+                message.channel.send("m!fit [current][goal]");
             }
             if(!args[0] || !args[1]){
                 message.channel.send("Invalid format, type m!fit help for usage info");
